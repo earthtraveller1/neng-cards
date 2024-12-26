@@ -1,21 +1,22 @@
 {
-  "name": "neng-cards",
-  "version": "0.0.1",
-  "description": "Flashcards, but with the courtesy of Neng.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/react": "^19.0.2",
-    "@types/react-dom": "^19.0.2",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.6"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  }
+    "name": "neng-cards",
+    "version": "0.0.1",
+    "description": "Flashcards, but with the courtesy of Neng.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "vite build --outDir src/main/resources/static"
+    },
+    "author": "",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/react": "^19.0.2",
+        "@types/react-dom": "^19.0.2",
+        "typescript": "^5.7.2",
+        "vite": "^6.0.6"
+    },
+    "dependencies": {
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0"
+    }
 }
