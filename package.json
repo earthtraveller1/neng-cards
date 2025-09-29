@@ -1,0 +1,17 @@
+{
+    "name": "neng-cards",
+    "version": "0.1.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "babel src -d client && webpack --mode development"
+    },
+    "dependencies": {
+        "react": "^19.1.1",
+        "react-dom": "^19.1.1"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.28.3",
+        "@babel/preset-react": "^7.27.1",
+        "webpack-cli": "^6.0.1"
+    }
+}
