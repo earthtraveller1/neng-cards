@@ -2,10 +2,12 @@
     "name": "neng-cards",
     "version": "0.1.0",
     "license": "MIT",
+    "type": "module",
     "scripts": {
-        "build": "babel src -d client && tailwindcss -i ./src/tailwind.css -o ./client/tailwind.css && webpack --mode development"
+        "build": "babel src -d client && tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css && webpack --mode development"
     },
     "dependencies": {
+        "express": "^5.1.0",
         "react": "^19.1.1",
         "react-dom": "^19.1.1"
     },
