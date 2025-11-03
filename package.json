@@ -4,7 +4,8 @@
     "license": "MIT",
     "type": "module",
     "scripts": {
-        "build": "babel src -d babel  && tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css && webpack --mode development"
+        "build": "babel src -d babel  && tailwindcss -i ./src/tailwind.css -o ./dist/tailwind.css && webpack --mode development",
+        "run": "node ./babel/main.js"
     },
     "dependencies": {
         "express": "^5.1.0",
