@@ -17,11 +17,10 @@ export default function CardStacks() {
     }, [])
 
     return (
-        <div>
+        <div className="flex flex-row flex-wrap">
             {stacks.map((stack) => {
-                return <div>
-                    <div>Name: {stack.name}</div>
-                    <div>ID: {stack.id}</div>
+                return <div className="m-4 flex min-h-48 w-sm flex-col p-4 bg-slate-800 border-solid border-4 rounded-xl">
+                    <div className="text-center font-bold">{stack.name}</div>
                 </div>
             })}
         </div>
