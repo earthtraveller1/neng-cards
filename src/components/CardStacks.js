@@ -19,9 +19,13 @@ export default function CardStacks() {
     return (
         <div className="flex flex-row flex-wrap">
             {stacks.map((stack) => {
-                return <div className="m-4 flex min-h-48 w-sm flex-col p-4 bg-slate-800 border-solid border-4 rounded-xl">
+                return <button className={ 
+                    "m-4 flex min-h-64 w-sm flex-col-reverse p-4 bg-slate-800 " + 
+                        "border-solid border-4 rounded-xl select-none " +
+                        "hover:bg-slate-300 hover:text-slate-800 hover:border-8 duration-300"
+                }>
                     <div className="text-center font-bold">{stack.name}</div>
-                </div>
+                </button>
             })}
         </div>
     )
