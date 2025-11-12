@@ -1,6 +1,6 @@
 import express from "express"
 import { MongoClient } from "mongodb"
-import { CardStack } from "./common.js"
+import { CardStack, NewCardStack } from "./common.js"
 
 function main() {
     const app = express()
@@ -19,6 +19,7 @@ function main() {
     const cardstacks = database.collection("stacks")
 
     app.use(express.static("dist"))
+    app.use(express.json())
 
     app.get("/", (_req, res) => {
         res.sendFile(`${process.cwd()}/index.html`)
@@ -32,10 +33,24 @@ function main() {
         /** @type Array<CardStack> */
         let stackArray = new Array()
         for await (const stack of stacks) {
-            stackArray.push(new CardStack(stack.name, stack._id))
+            stackArray.push(new CardStack(stack.name, stack._id.toString()))
         }
 
         res.json(stackArray)
+    })
+
+    app.post("/api/stacks", async (req, res) => {
+        if (!(req.body instanceof NewCardStack)) {
+            res.sendStatus(400)
+            return
+        }
+
+        let newStack = req.body
+        try {
+            cardstacks.insertOne(newStack)
+        } catch (e) {
+            res.sendStatus(500)
+        }
     })
 
     app.listen(port, () => {
