@@ -1,23 +1,23 @@
 export class CardStack {
     /**
-     * @type string
+     * @type {string}
      * @public
      */
     name
 
     /**
-     * @type number
+     * @type {any}
      * @public
      */
-    id
+    _id
 
     /**
     * @param {string} name
-    * @param {number} id 
+    * @param {any} id 
     */
     constructor(name, id) {
         this.name = name
-        this.id = id
+        this._id = id
     }
 }
 

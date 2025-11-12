@@ -1,4 +1,5 @@
 import express from "express"
+import { MongoClient } from "mongodb"
 import { CardStack } from "./common.js"
 
 function main() {
@@ -8,20 +9,33 @@ function main() {
         port = parseInt(process.env.PORT)
     }
 
+    let databaseURI = "mongodb://127.0.0.1"
+    if (process.env.MONGO_URI != undefined) {
+        databaseURI = process.env.MONGO_URI
+    }
+
+    const client = new MongoClient(databaseURI)
+    const database = client.db("neng-cards")
+    const cardstacks = database.collection("stacks")
+
     app.use(express.static("dist"))
 
     app.get("/", (_req, res) => {
         res.sendFile(`${process.cwd()}/index.html`)
     })
 
-    app.get("/api/stacks", (_req, res) => {
+    app.get("/api/stacks", async (_req, res) => {
         // For now, we do not have a database, so we are just going to return
         // some dummy values.
-        res.json([
-            new CardStack("Chemistry", 0),
-            new CardStack("Biology", 1),
-            new CardStack("Yeezy", 2)
-        ])
+        let stacks = cardstacks.find()
+
+        /** @type Array<CardStack> */
+        let stackArray = new Array()
+        for await (const stack of stacks) {
+            stackArray.push(new CardStack(stack.name, stack._id))
+        }
+
+        res.json(stackArray)
     })
 
     app.listen(port, () => {

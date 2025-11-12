@@ -1,3 +1,3 @@
 module.exports = {
-    entry: "./babel/index.js"
+    entry: "./babel/index.js",
 }
