@@ -13,8 +13,9 @@ export default function Button(props) {
         <button 
             onClick={props.onClick}
             className={
-                "p-4 m-2 border-solid rounded-xl bg-green-400 border-green-400 " +
-                    "hover:border-green-300 hover:bg-green-300 text-rose-900"
+                "px-3 py-1 m-2 border-solid rounded-xl bg-cyan-400 border-cyan-400 " +
+                    "hover:border-cyan-300 hover:bg-cyan-300 text-black hover:rounded-lg " +
+                    "active:border-green-300 active:bg-green-300 duration-250 active:rounded-2xl"
             }
         >
             {props.children}
