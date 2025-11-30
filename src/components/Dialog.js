@@ -8,7 +8,7 @@ export default function Dialog(props) {
     return (
         <>
             <div className="absolute top-0 bottom-0 right-0 left-0 bg-slate-950/70" />
-            <div className="absolute top-1/2 left-1/2 rounded-4xl bg-cyan-800 -translate-1/2 p-4">
+            <div className="absolute top-1/2 left-1/2 rounded-4xl bg-zinc-800 -translate-1/2 p-8">
                 {props.children}
             </div>
         </>
