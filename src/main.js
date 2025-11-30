@@ -38,14 +38,20 @@ function main() {
     })
 
     app.post("/api/stacks", async (req, res) => {
-        if (!(req.body instanceof NewCardStack)) {
+        /** @type {NewCardStack} */
+        let newStack = new NewCardStack("")
+
+        if (req.body.name == undefined) {
+            res.json({ error: "Required `name` field missing." })
             res.sendStatus(400)
             return
         }
 
-        let newStack = req.body
+        newStack.name = req.body.name
+
         try {
             cardstacks.insertOne(newStack)
+            res.sendStatus(200)
         } catch (e) {
             res.sendStatus(500)
         }
