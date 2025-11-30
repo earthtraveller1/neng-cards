@@ -26,8 +26,6 @@ function main() {
     })
 
     app.get("/api/stacks", async (_req, res) => {
-        // For now, we do not have a database, so we are just going to return
-        // some dummy values.
         let stacks = cardstacks.find()
 
         /** @type Array<CardStack> */
