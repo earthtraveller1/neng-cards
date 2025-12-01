@@ -1,6 +1,13 @@
 import React from "react"
 
-/** @param {{ name: string, onInput: (value: string) => void, className: string?}} props */
+/**
+ * @typedef {Object} InputFieldProps
+ * @property {string} name
+ * @property {(value: string) => void} onInput
+ * @property {string} [className]
+ */
+
+/** @param {InputFieldProps} props */
 export default function InputField(props) {
     let style = "border-solid border-b-4 border-zinc-700 hover:border-cyan-300 " +
         "focus:border-blue-500 duration-250 outline-none"

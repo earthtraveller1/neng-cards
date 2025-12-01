@@ -1,12 +1,10 @@
 import React from "react"
 
-class ButtonProps {
-    /** @type {React.MouseEventHandler} */
-    onClick
-
-    /** @type {string?} */
-    className
-}
+/**
+ * @typedef {Object} ButtonProps
+ * @property {React.MouseEventHandler} onClick
+ * @property {string} [className]
+ */
 
 /**
  * @param {React.PropsWithChildren<ButtonProps>} props
