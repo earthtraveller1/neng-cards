@@ -43,8 +43,8 @@ export default function CardStacks() {
 
             {newStackDialog && <Dialog>
                 <h1 className="text-lg">Create a new Stack</h1>
-                <InputField name="Name" onInput={setNewStackName} />
-                <Button onClick={() => {
+                <InputField className="my-8" name="Name" onInput={setNewStackName} />
+                <Button className="mt-4" onClick={() => {
                     fetch("/api/stacks", {
                         method: "POST",
                         body: JSON.stringify(new NewCardStack(newStackName)),
