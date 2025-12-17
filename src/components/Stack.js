@@ -4,6 +4,8 @@
 
 import { CardStack } from "../common.js";
 import React from "react";
+import Button from "./Button.js";
+import { SetCurrentStackContext } from "../index.js";
 
 /**
  * @typedef {Object} StackProps
@@ -14,5 +16,15 @@ import React from "react";
  * @param {StackProps} props
 */
 export default function Stack(props) {
-    return <h1>{props.currentStack.name}</h1>
+    const setCurrentStack = React.useContext(SetCurrentStackContext)
+
+    return <div className="flex flex-row">
+        <Button onClick={
+            () => {
+                setCurrentStack(null)
+            }
+        }>Go Back</Button>
+
+        <h1>{props.currentStack.name}</h1>
+    </div>
 }
