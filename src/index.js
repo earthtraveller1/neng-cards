@@ -2,11 +2,23 @@ import * as ReactDOM from "react-dom/client"
 import * as React from "react"
 import Header from "./components/Header.js"
 import CardStacks from "./components/CardStacks.js"
+import { CardStack } from "./common.js"
+import Stack from "./components/Stack.js"
+
+export const SetCurrentStackContext = React.createContext(/** @type {(arg0: CardStack) => void} */ _ => {})
 
 function Index() {
+    const [currentStack, setCurrentStack] = React.useState(/** @type {CardStack} */ (null));
+
     return <div className="text-slate-100">
         <Header />
-        <CardStacks />
+        <SetCurrentStackContext value={setCurrentStack}>
+        {
+            currentStack == null 
+                ? <CardStacks /> 
+                : <Stack currentStack={currentStack} />
+        }
+        </SetCurrentStackContext>
     </div>
 }
 

@@ -3,6 +3,7 @@ import { CardStack, NewCardStack } from "../common.js"
 import Dialog from "./Dialog.js"
 import InputField from "./InputField.js"
 import Button from "./Button.js"
+import { SetCurrentStackContext } from "../index.js"
 
 export default function CardStacks() {
     const [stacks, setStacks] = React.useState(/** @type {CardStack[]} */([]))
@@ -21,6 +22,8 @@ export default function CardStacks() {
         })
     }, [newStackDialog])
 
+    const setCurrentStack = React.useContext(SetCurrentStackContext)
+
     return (
         <>
             <div className="flex flex-row items-start">
@@ -35,7 +38,9 @@ export default function CardStacks() {
                         "m-4 flex min-h-64 w-sm flex-col-reverse p-4 bg-slate-800 " +
                         "border-solid border-4 rounded-xl select-none " +
                         "hover:bg-slate-300 hover:text-slate-800 hover:border-8 duration-300"
-                    }>
+                    } onClick={() => {
+                        setCurrentStack(stack)
+                    }}>
                         <div className="text-center font-bold">{stack.name}</div>
                     </button>
                 })}
