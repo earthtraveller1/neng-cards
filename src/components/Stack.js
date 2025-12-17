@@ -25,6 +25,14 @@ export default function Stack(props) {
             }
         }>Go Back</Button>
 
+        <Button onClick={
+            () => {
+                fetch(`/api/stacks/${props.currentStack._id}`, { method: "delete" }).then(() => {
+                    setCurrentStack(null)
+                })
+            }
+        }>Delete Stack</Button>
+
         <h1>{props.currentStack.name}</h1>
     </div>
 }
