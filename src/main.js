@@ -1,5 +1,5 @@
 import express from "express"
-import { MongoClient } from "mongodb"
+import { MongoClient, ObjectId } from "mongodb"
 import { CardStack, NewCardStack } from "./common.js"
 
 function main() {
@@ -54,6 +54,16 @@ function main() {
             res.sendStatus(200)
         } catch (e) {
             res.sendStatus(500)
+        }
+    })
+
+    app.delete("/api/stacks/:stackId", async (req, res) => {
+        try {
+            cardstacks.deleteOne({ _id: new ObjectId( req.params.stackId ) })
+            res.sendStatus(200)
+        } catch (e) {
+            res.json(e)
+            res.sendStatus(400)
         }
     })
 
