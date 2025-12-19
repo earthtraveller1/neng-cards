@@ -8,6 +8,7 @@ import { SetCurrentStackContext } from "../index.js";
 
 /**
  * @typedef {import("../common.js").CardStack} CardStack
+ * @typedef {import("../common.js").Card} Card
  */
 
 /**
@@ -35,6 +36,16 @@ export default function Stack(props) {
                 })
             }
         }>Delete Stack</Button>
+
+        <Button onClick={
+            () => {
+                fetch(`/api/stacks/${props.currentStack._id}/cards`, {
+                    method: "post" ,
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(/** @type {Card} */ ({ frontText: "Hello!", backText: "Goodbye!" }))
+                })
+            }
+        }>Add a Card</Button>
 
         <h1>{props.currentStack.name}</h1>
     </div>
