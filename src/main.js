@@ -42,15 +42,21 @@ function main() {
         res.json(stackArray)
     })
 
+    app.get("/api/stacks/:stackId", async (req, res) => {
+        const stackId = req.params.stackId
+        let stack = await cardstacks.findOne({ _id: new ObjectId(stackId) })
+        res.json(stack)
+    })
+
     app.post("/api/stacks/:stackId/cards", async (req, res) => {
         const stackId = req.params.stackId
         const query = { _id: new ObjectId(stackId) }
 
         /** @type {Card} */
-        let newCard = { _id: new ObjectId(), frontText: "", backText: ""}
+        let newCard = { _id: new ObjectId(), frontText: "", backText: "" }
 
         if (req.body.frontText == undefined) {
-            res.json({ error: "Required 'frontText' field missing."} )
+            res.json({ error: "Required 'frontText' field missing." })
             res.sendStatus(400)
             return
         }
@@ -65,14 +71,14 @@ function main() {
 
         newCard.backText = req.body.backText
 
-        const update = { $push: { cards: newCard }}
+        const update = { $push: { cards: newCard } }
 
-        cardstacks.updateOne(query, update)
+        await cardstacks.updateOne(query, update)
     })
 
     app.post("/api/stacks", async (req, res) => {
         /** @type {CardStack} */
-        let newStack = { name: "", cards: []}
+        let newStack = { name: "", cards: [] }
 
         if (req.body.name == undefined) {
             res.json({ error: "Required `name` field missing." })
@@ -83,7 +89,7 @@ function main() {
         newStack.name = req.body.name
 
         try {
-            cardstacks.insertOne(newStack)
+            await cardstacks.insertOne(newStack)
             res.sendStatus(200)
         } catch (e) {
             res.sendStatus(500)
@@ -92,7 +98,20 @@ function main() {
 
     app.delete("/api/stacks/:stackId", async (req, res) => {
         try {
-            cardstacks.deleteOne({ _id: new ObjectId( req.params.stackId ) })
+            await cardstacks.deleteOne({ _id: new ObjectId(req.params.stackId) })
+            res.sendStatus(200)
+        } catch (e) {
+            res.json(e)
+            res.sendStatus(400)
+        }
+    })
+
+    app.delete("/api/stacks/:stackId/cards/:cardId", async (req, res) => {
+        const stackId = req.params.stackId
+        const cardId = req.params.cardId
+
+        try {
+            await cardstacks.updateOne({ _id: new ObjectId(stackId) }, { $pull: { cards: { _id: new ObjectId(cardId) } } })
             res.sendStatus(200)
         } catch (e) {
             res.json(e)
