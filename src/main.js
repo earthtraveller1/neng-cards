@@ -74,6 +74,7 @@ function main() {
         const update = { $push: { cards: newCard } }
 
         await cardstacks.updateOne(query, update)
+        res.sendStatus(200)
     })
 
     app.post("/api/stacks", async (req, res) => {
