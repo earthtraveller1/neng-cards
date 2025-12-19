@@ -26,8 +26,8 @@ export default function CardStacks() {
 
     return (
         <>
-            <div className="flex flex-row items-start">
-                <h1 className="text-xl text-slate-400 font-bold px-4 pt-4">Your Stacks</h1>
+            <div className="flex flex-row items-start pt-4 items-center">
+                <h1 className="text-xl text-slate-400 font-bold px-4">Your Stacks</h1>
                 <Button onClick={() => {
                     setNewStackDialog(true)
                 }}>New Stack</Button>
