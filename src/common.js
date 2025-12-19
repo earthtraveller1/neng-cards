@@ -69,3 +69,33 @@ export class Card {
         this._stackId = stack._id
     }
 }
+
+// This is the type of the class that you send to the server when
+// creating a new card.
+export class NewCard {
+    /** @type {string} */
+    _stackId
+
+    /** 
+     * @type {string} 
+     * @public
+     * */
+    frontText
+
+    /** 
+     * @type {string} 
+     * @public
+     * */
+    backText
+
+    /**
+    * @param {string} frontText
+    * @param {string} backText
+    * @param {CardStack} stack
+    */
+    constructor(frontText, backText, stack) {
+        this.frontText = frontText
+        this.backText = backText
+        this._stackId = stack._id
+    }
+}
