@@ -63,7 +63,7 @@ function main() {
             return
         }
 
-        newCard.frontText = req.body.frontText
+        newCard.backText = req.body.backText
 
         const update = { $push: { cards: newCard }}
 
