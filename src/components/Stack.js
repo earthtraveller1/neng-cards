@@ -2,10 +2,13 @@
 //
 //
 
-import { CardStack } from "../common.js";
 import React from "react";
 import Button from "./Button.js";
 import { SetCurrentStackContext } from "../index.js";
+
+/**
+ * @typedef {import("../common.js").CardStack} CardStack
+ */
 
 /**
  * @typedef {Object} StackProps

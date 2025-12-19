@@ -2,8 +2,12 @@ import * as ReactDOM from "react-dom/client"
 import * as React from "react"
 import Header from "./components/Header.js"
 import CardStacks from "./components/CardStacks.js"
-import { CardStack } from "./common.js"
 import Stack from "./components/Stack.js"
+
+/**
+ * @typedef {import("./common.js").Card} Card
+ * @typedef {import("./common.js").CardStack} CardStack
+ */
 
 export const SetCurrentStackContext = React.createContext(/** @type {(arg0: CardStack) => void} */ _ => {})
 

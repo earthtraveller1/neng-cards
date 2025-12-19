@@ -1,9 +1,13 @@
 import React from "react"
-import { CardStack, NewCardStack } from "../common.js"
 import Dialog from "./Dialog.js"
 import InputField from "./InputField.js"
 import Button from "./Button.js"
 import { SetCurrentStackContext } from "../index.js"
+
+/**
+ * @typedef {import("../common.js").Card} Card
+ * @typedef {import("../common.js").CardStack} CardStack
+ */
 
 export default function CardStacks() {
     const [stacks, setStacks] = React.useState(/** @type {CardStack[]} */([]))
@@ -52,7 +56,7 @@ export default function CardStacks() {
                 <Button className="mt-4" onClick={() => {
                     fetch("/api/stacks", {
                         method: "POST",
-                        body: JSON.stringify(new NewCardStack(newStackName)),
+                        body: JSON.stringify(/** @type {CardStack} */ ({ name: newStackName, cards: []})),
                         headers: {
                             "Content-Type": "application/json"
                         }

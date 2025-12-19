@@ -1,6 +1,10 @@
 import express from "express"
-import { MongoClient, ObjectId } from "mongodb"
-import { CardStack, NewCardStack } from "./common.js"
+import { Collection, MongoClient, ObjectId } from "mongodb"
+
+/**
+ * @typedef {import("./common.js").Card} Card
+ * @typedef {import("./common.js").CardStack} CardStack
+ */
 
 function main() {
     const app = express()
@@ -16,6 +20,7 @@ function main() {
 
     const client = new MongoClient(databaseURI)
     const database = client.db("neng-cards")
+    /** @type {Collection<CardStack> }*/
     const cardstacks = database.collection("stacks")
 
     app.use(express.static("dist"))
@@ -31,15 +36,43 @@ function main() {
         /** @type Array<CardStack> */
         let stackArray = new Array()
         for await (const stack of stacks) {
-            stackArray.push(new CardStack(stack.name, stack._id.toString(), stack.cards))
+            stackArray.push(stack)
         }
 
         res.json(stackArray)
     })
 
+    app.post("/api/stacks/:stackId/cards", async (req, res) => {
+        const stackId = req.params.stackId
+        const query = { _id: new ObjectId(stackId) }
+
+        /** @type {Card} */
+        let newCard = { _id: new ObjectId(), frontText: "", backText: ""}
+
+        if (req.body.frontText == undefined) {
+            res.json({ error: "Required 'frontText' field missing."} )
+            res.sendStatus(400)
+            return
+        }
+
+        newCard.frontText = req.body.frontText
+
+        if (req.body.backText == undefined) {
+            res.json({ error: "Required 'backText' field missing." })
+            res.sendStatus(400)
+            return
+        }
+
+        newCard.frontText = req.body.frontText
+
+        const update = { $push: { cards: newCard }}
+
+        cardstacks.updateOne(query, update)
+    })
+
     app.post("/api/stacks", async (req, res) => {
-        /** @type {NewCardStack} */
-        let newStack = new NewCardStack("")
+        /** @type {CardStack} */
+        let newStack = { name: "", cards: []}
 
         if (req.body.name == undefined) {
             res.json({ error: "Required `name` field missing." })
