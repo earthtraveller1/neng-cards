@@ -37,3 +37,35 @@ export class NewCardStack {
     }
 }
 
+export class Card {
+    /** @type {string} */
+    _id
+
+    /** @type {string} */
+    _stackId
+
+    /** 
+     * @type {string} 
+     * @public
+     * */
+    frontText
+
+    /** 
+     * @type {string} 
+     * @public
+     * */
+    backText
+
+    /**
+    * @param {string} frontText
+    * @param {string} backText
+    * @param {string} id
+    * @param {CardStack} stack
+    */
+    constructor(frontText, backText, id, stack) {
+        this.frontText = frontText
+        this.backText = backText
+        this._id = id
+        this._stackId = stack._id
+    }
+}
