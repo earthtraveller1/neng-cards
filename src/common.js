@@ -12,12 +12,19 @@ export class CardStack {
     _id
 
     /**
+     * @type {Card[]}
+     */
+    cards
+
+    /**
     * @param {string} name
     * @param {string} id 
+    * @param {Card[]} cards
     */
-    constructor(name, id) {
+    constructor(name, id, cards) {
         this.name = name
         this._id = id
+        this.cards = cards
     }
 }
 
@@ -41,9 +48,6 @@ export class Card {
     /** @type {string} */
     _id
 
-    /** @type {string} */
-    _stackId
-
     /** 
      * @type {string} 
      * @public
@@ -60,22 +64,17 @@ export class Card {
     * @param {string} frontText
     * @param {string} backText
     * @param {string} id
-    * @param {CardStack} stack
     */
-    constructor(frontText, backText, id, stack) {
+    constructor(frontText, backText, id) {
         this.frontText = frontText
         this.backText = backText
         this._id = id
-        this._stackId = stack._id
     }
 }
 
 // This is the type of the class that you send to the server when
 // creating a new card.
 export class NewCard {
-    /** @type {string} */
-    _stackId
-
     /** 
      * @type {string} 
      * @public
@@ -91,11 +90,9 @@ export class NewCard {
     /**
     * @param {string} frontText
     * @param {string} backText
-    * @param {CardStack} stack
     */
-    constructor(frontText, backText, stack) {
+    constructor(frontText, backText) {
         this.frontText = frontText
         this.backText = backText
-        this._stackId = stack._id
     }
 }

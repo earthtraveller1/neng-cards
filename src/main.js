@@ -31,7 +31,7 @@ function main() {
         /** @type Array<CardStack> */
         let stackArray = new Array()
         for await (const stack of stacks) {
-            stackArray.push(new CardStack(stack.name, stack._id.toString()))
+            stackArray.push(new CardStack(stack.name, stack._id.toString(), stack.cards))
         }
 
         res.json(stackArray)
