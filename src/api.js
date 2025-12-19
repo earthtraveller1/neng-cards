@@ -6,7 +6,7 @@
 /**
  * @returns {Promise<CardStack[]>}
 */
-async function getStacks() {
+export async function getStacks() {
     const response = await fetch("/api/stacks")
     // Maybe do some data validation later to ensure that this is the 
     // right type
@@ -18,7 +18,7 @@ async function getStacks() {
  * @returns {Promise<CardStack>}
  * @param {string} id
 */
-async function getStack(id) {
+export async function getStack(id) {
     const response = await fetch(`/api/stacks/${id}`)
     const json = /** @type { CardStack } */ (await response.json())
     return json
@@ -28,7 +28,7 @@ async function getStack(id) {
  * @param {string} stackId
  * @param {Card} card
  */
-async function createCard(stackId, card) {
+export async function createCard(stackId, card) {
     await fetch(`/api/stacks/${stackId}/cards`, {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -39,7 +39,7 @@ async function createCard(stackId, card) {
 /**
 * @param {string} stackName
 */
-async function createStack(stackName) {
+export async function createStack(stackName) {
     await fetch("/api/stacks", {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -50,13 +50,13 @@ async function createStack(stackName) {
 /**
  * @param {string} id
  */
-async function deleteStack(id) {
+export async function deleteStack(id) {
     await fetch(`/api/stacks/${id}`, { method: "delete" })
 }
 
 /** @param {string} stackId
  * @param {string} cardId
  */
-async function deleteCard(stackId, cardId) {
+export async function deleteCard(stackId, cardId) {
     await fetch(`/api/stacks/${stackId}/cards/${cardId}`, { method: "delete" })
 }
