@@ -1,4 +1,5 @@
-import { ObjectId } from "mongodb"
+/**
+ * @typedef {import('mongodb').ObjectId} ObjectId
 
 /** @typedef {object} CardStack
  * @property {ObjectId} [_id]
