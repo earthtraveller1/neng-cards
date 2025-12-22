@@ -9,6 +9,7 @@ import { SetCurrentStackContext } from "../index.js";
 import InputField from "./InputField.js";
 
 import * as API from "../api.js"
+import { Colors } from "../common.js";
 
 /**
  * @typedef {import("../common.js").CardStack} CardStack
@@ -37,27 +38,27 @@ export default function Stack(props) {
         })
     }, [addCardDialog])
 
-    return <div>
+    return <div className="m-4">
         <div className="flex flex-row">
-            <h1>{props.currentStack.name}</h1>
+            <h1 className="text-xl text-slate-400">{props.currentStack.name}</h1>
 
-            <Button onClick={
+            <Button color={Colors.CYAN} onClick={
                 () => {
                     setCurrentStack(null)
                 }
-            }>Go Back</Button>
+            } className="ml-4">Go Back</Button>
 
-            <Button onClick={
+            <Button color={Colors.CYAN} onClick={
                 () => {
                     fetch(`/api/stacks/${props.currentStack._id}`, { method: "delete" }).then(() => {
                         setCurrentStack(null)
                     })
                 }
-            }>Delete Stack</Button>
+            } className="ml-4">Delete Stack</Button>
 
-            <Button onClick={
+            <Button color={Colors.CYAN} onClick={
                 () => { setAddCardDialog(true) }
-            }>Add a Card</Button>
+            } className="ml-4">Add a Card</Button>
         </div>
 
         <div className="flex flex-col">
@@ -71,7 +72,7 @@ export default function Stack(props) {
             <InputField name="Front:" onInput={setNewCardFront} />
             <InputField name="Back:" onInput={setNewCardBack} />
 
-            <Button onClick={() => {
+            <Button color={Colors.CYAN} onClick={() => {
                 API.createCard(props.currentStack._id.toString(), {
                     frontText: newCardFront,
                     backText: newCardBack

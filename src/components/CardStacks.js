@@ -3,6 +3,7 @@ import Dialog from "./Dialog.js"
 import InputField from "./InputField.js"
 import Button from "./Button.js"
 import { SetCurrentStackContext } from "../index.js"
+import { Colors } from "../common.js"
 
 /**
  * @typedef {import("../common.js").Card} Card
@@ -32,7 +33,7 @@ export default function CardStacks() {
         <>
             <div className="flex flex-row items-start pt-4 items-center">
                 <h1 className="text-xl text-slate-400 font-bold px-4">Your Stacks</h1>
-                <Button onClick={() => {
+                <Button color={Colors.CYAN} onClick={() => {
                     setNewStackDialog(true)
                 }}>New Stack</Button>
             </div>
@@ -53,7 +54,7 @@ export default function CardStacks() {
             {newStackDialog && <Dialog>
                 <h1 className="text-lg">Create a new Stack</h1>
                 <InputField className="my-8" name="Name" onInput={setNewStackName} />
-                <Button className="mt-4" onClick={() => {
+                <Button color={Colors.CYAN} className="mt-4" onClick={() => {
                     fetch("/api/stacks", {
                         method: "POST",
                         body: JSON.stringify(/** @type {CardStack} */ ({ name: newStackName, cards: []})),
