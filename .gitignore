@@ -1,4 +1,5 @@
 /babel/
-/dist/
+/dist/*
+!/dist/images
 /node_modules/
 /data/
