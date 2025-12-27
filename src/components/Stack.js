@@ -61,9 +61,16 @@ export default function Stack(props) {
             } className="ml-4">Add a Card</Button>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col my-4 max-w-1/2">
             {props.currentStack.cards.map(card =>
-                <p>Front: {card.frontText}, Back: {card.backText}, Id: {card._id.toString()}</p>
+                <div className="flex my-2 bg-blue-500 rounded-xl p-2 border-blue-900 border-0 hover:border-8 hover:bg-blue-700 duration-200 flex-row content-center">
+                    <div className="mr-auto">
+                        {card.frontText}
+                    </div>
+                    <div className="text-red-900 bg-red-400 p-2 rounded-xl mr-4 duration-100 hover:rounded-2xl hover:bg-red-500">
+                        <img src="/images/delete.svg" width="24" />
+                    </div>
+                </div>
             )}
         </div>
 
