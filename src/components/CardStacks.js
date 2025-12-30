@@ -33,7 +33,7 @@ export default function CardStacks() {
         <>
             <div className="flex flex-row items-start pt-4 items-center">
                 <h1 className="text-xl text-slate-400 font-bold px-4">Your Stacks</h1>
-                <Button color={Colors.CYAN} onClick={() => {
+                <Button color={Colors.GREEN} onClick={() => {
                     setNewStackDialog(true)
                 }}>New Stack</Button>
             </div>

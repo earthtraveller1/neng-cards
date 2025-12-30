@@ -51,17 +51,17 @@ export default function Stack(props) {
                 }
             } className="ml-4">Go Back</Button>
 
-            <Button color={Colors.CYAN} onClick={
+            <Button color={Colors.GREEN} onClick={
+                () => { setAddCardDialog(true) }
+            } className="ml-4">Add a Card</Button>
+
+            <Button color={Colors.RED} onClick={
                 () => {
                     fetch(`/api/stacks/${props.currentStack._id}`, { method: "delete" }).then(() => {
                         setCurrentStack(null)
                     })
                 }
             } className="ml-4">Delete Stack</Button>
-
-            <Button color={Colors.CYAN} onClick={
-                () => { setAddCardDialog(true) }
-            } className="ml-4">Add a Card</Button>
         </div>
 
         <div className="flex flex-col my-4 max-w-1/2">
