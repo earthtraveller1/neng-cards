@@ -33,7 +33,7 @@ export default function Stack(props) {
     const [newCardFront, setNewCardFront] = React.useState("")
     const [newCardBack, setNewCardBack] = React.useState("")
 
-    const [targetCard, setTargetCard] = React.useState(/** @type {Card} */ (null))
+    const [targetCard, setTargetCard] = React.useState(/** @type {Card} */(null))
 
     React.useEffect(() => {
         API.getStack(props.currentStack._id.toString()).then((stack) => {
@@ -71,8 +71,8 @@ export default function Stack(props) {
                         {card.frontText}
                     </div>
                     <div className="text-red-900 bg-red-400 p-2 rounded-xl mr-4 duration-100 hover:rounded-2xl hover:bg-red-500">
-                        <img src="/images/delete.svg" width="24" onClick={() => { 
-                            setDeleteCardDialog(true) 
+                        <img src="/images/delete.svg" width="24" onClick={() => {
+                            setDeleteCardDialog(true)
                             setTargetCard(card)
                         }} />
                     </div>
@@ -96,17 +96,19 @@ export default function Stack(props) {
         </Dialog>}
 
         {deleteCardDialog && <Dialog>
-            <h1>Are you sure?</h1>
+            <h1 className="p-2">Are you sure?</h1>
 
-            <Button color={Colors.RED} onClick={() => {
-                API.deleteCard(props.currentStack._id.toString(), targetCard._id.toString()).then(() => {
+            <div className="flex flex-row p-2">
+                <Button color={Colors.RED} className="mr-4" onClick={() => {
+                    API.deleteCard(props.currentStack._id.toString(), targetCard._id.toString()).then(() => {
+                        setDeleteCardDialog(false)
+                    })
+                }}>Yes</Button>
+
+                <Button color={Colors.CYAN} onClick={() => {
                     setDeleteCardDialog(false)
-                })
-            }}>Yes</Button>
-
-            <Button color={Colors.CYAN} onClick={() => {
-                setDeleteCardDialog(false)
-            }}>No</Button>
+                }}>No</Button>
+            </div>
         </Dialog>}
     </div>
 }
