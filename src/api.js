@@ -60,3 +60,16 @@ export async function deleteStack(id) {
 export async function deleteCard(stackId, cardId) {
     await fetch(`/api/stacks/${stackId}/cards/${cardId}`, { method: "delete" })
 }
+
+/**
+    * @param {string} stackId
+    * @param {string} cardId
+    * @param {Card} card
+    */
+export async function updateCard(stackId, cardId, card) {
+    await fetch(`/api/stacks/${stackId}/cards/${cardId}`, {
+        method: "put",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(card)
+    })
+}
