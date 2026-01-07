@@ -81,11 +81,11 @@ export default function Stack(props) {
         </div>
 
         {addCardDialog && <Dialog>
-            <h1>Add a Card</h1>
-            <InputField name="Front:" onInput={setNewCardFront} />
-            <InputField name="Back:" onInput={setNewCardBack} />
+            <h1 className="my-2">Add a Card</h1>
+            <InputField className="my-2" name="Front:" onInput={setNewCardFront} />
+            <InputField className="my-2" name="Back:" onInput={setNewCardBack} />
 
-            <Button color={Colors.CYAN} onClick={() => {
+            <Button className="mt-4" color={Colors.CYAN} onClick={() => {
                 API.createCard(props.currentStack._id.toString(), {
                     frontText: newCardFront,
                     backText: newCardBack
