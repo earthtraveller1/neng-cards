@@ -120,6 +120,47 @@ function main() {
         }
     })
 
+    app.put("/api/stacks/:stackId/cards/:cardId", async (req, res) => {
+        const stackId = req.params.stackId
+        const cardId = req.params.cardId
+
+        if (req.body.frontText == undefined) {
+            res.json({ error: "Required 'frontText' field missing." })
+            res.sendStatus(400)
+            return
+        }
+
+        if (req.body.backText == undefined) {
+            res.json({ error: "Required 'backText' field missing." })
+            res.sendStatus(400)
+            return
+        }
+
+        const query = {
+            _id: new ObjectId(stackId),
+            cards: {
+                elemMatch: {
+                    _id: new ObjectId(cardId)
+                }
+            }
+        }
+
+        const update = {
+            $set: {
+                "cards.$.frontText": req.body.frontText,
+                "cards.$.backText": req.body.backText
+            }
+        }
+
+        try {
+            await cardstacks.updateOne(query, update)
+            res.sendStatus(200)
+        } catch (e) {
+            res.json(e)
+            res.sendStatus(400)
+        }
+    })
+
     app.listen(port, () => {
         console.log(`Listeing on *:${port}`)
     })
