@@ -1,3 +1,3 @@
 # Neng Cards
 
-Flashcards, but courtesy of Neng.
+Flashcards, but courtesy of Neng. Indeed.
