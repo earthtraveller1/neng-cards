@@ -108,11 +108,13 @@ export default function Stack(props) {
             <InputField className="my-2" name="Back:" onInput={setNewCardBack} />
 
             <Button className="mt-4" color={Colors.CYAN} onClick={() => {
-                API.updateCard(props.currentStack._id.toString(), targetCard._id.toString(), {
-                    frontText: newCardFront,
-                    backText: newCardBack,
-                }).then(() => {
-                    setEditCardDialog(false)
+                API.deleteCard(props.currentStack._id.toString(), targetCard._id.toString()).then(() => {
+                    API.createCard(props.currentStack._id.toString(), {
+                        frontText: newCardFront,
+                        backText: newCardBack,
+                    }).then(() => {
+                        setEditCardDialog(false);
+                    })
                 })
             }}>Okay</Button>
         </Dialog>}
