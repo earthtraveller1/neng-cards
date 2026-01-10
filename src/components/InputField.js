@@ -3,6 +3,7 @@ import React from "react"
 /**
  * @typedef {Object} InputFieldProps
  * @property {string} name
+ * @property {string} [defaultValue]
  * @property {(value: string) => void} onInput
  * @property {string} [className]
  */
@@ -23,6 +24,7 @@ export default function InputField(props) {
             <p className="pr-2">{props.name}</p>
             <input
                 className={innerStyle}
+                placeholder={props.defaultValue == null ? "" : props.defaultValue}
                 onInput={input => {
                     props.onInput(input.currentTarget.value)
                 }}
