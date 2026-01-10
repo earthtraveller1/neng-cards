@@ -66,7 +66,15 @@ export default function Stack(props) {
         </div>
 
         <div className="flex flex-col my-4 max-w-1/2">
-            {props.currentStack.cards.map(card =>
+            {props.currentStack.cards.sort((a, b) => {
+                if (a.frontText[0] > b.frontText[0]) {
+                    return 1;
+                } else if (a.frontText[0] < b.frontText[0]) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }).map(card =>
                 <div className="flex text-lg my-2 bg-blue-600 rounded-xl p-2 hover:bg-blue-700 duration-200 flex-row content-center">
                     <div className="mr-auto">
                         {card.frontText}
