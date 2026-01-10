@@ -29,6 +29,7 @@ export default function Stack(props) {
 
     const [addCardDialog, setAddCardDialog] = React.useState(false)
     const [deleteCardDialog, setDeleteCardDialog] = React.useState(false)
+    const [editCardDialog, setEditCardDialog] = React.useState(false);
 
     const [newCardFront, setNewCardFront] = React.useState("")
     const [newCardBack, setNewCardBack] = React.useState("")
@@ -39,7 +40,7 @@ export default function Stack(props) {
         API.getStack(props.currentStack._id.toString()).then((stack) => {
             setCurrentStack(stack)
         })
-    }, [addCardDialog, deleteCardDialog])
+    }, [addCardDialog, deleteCardDialog, editCardDialog])
 
     return <div className="m-4">
         <div className="flex flex-row my-4">
@@ -76,6 +77,12 @@ export default function Stack(props) {
                             setTargetCard(card)
                         }} />
                     </div>
+                    <div className="text-red-900 bg-green-400 p-2 rounded-lg mr-4 duration-100 hover:rounded-2xl hover:bg-green-500">
+                        <img src="/images/edit.svg" width="16" onClick={() => {
+                            setEditCardDialog(true)
+                            setTargetCard(card)
+                        }} />
+                    </div>
                 </div>
             )}
         </div>
@@ -93,6 +100,21 @@ export default function Stack(props) {
                     setAddCardDialog(false)
                 })
             }}>Add</Button>
+        </Dialog>}
+
+        {editCardDialog && <Dialog>
+            <h1>Edit the Card</h1>
+            <InputField className="my-2" name="Front:" onInput={setNewCardFront} />
+            <InputField className="my-2" name="Back:" onInput={setNewCardBack} />
+
+            <Button className="mt-4" color={Colors.CYAN} onClick={() => {
+                API.updateCard(props.currentStack._id.toString(), targetCard._id.toString(), {
+                    frontText: newCardFront,
+                    backText: newCardBack,
+                }).then(() => {
+                    setEditCardDialog(false)
+                })
+            }}>Okay</Button>
         </Dialog>}
 
         {deleteCardDialog && <Dialog>
